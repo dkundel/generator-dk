@@ -1,0 +1,3 @@
+{
+  "extends": ["@dkundel/js", <% if (typescript) { %>"@dkundel/ts", <% } %>"@dkundel/js/jest"]
+}
