@@ -17,10 +17,14 @@ module.exports = class extends Generator {
   writing() {
     const pkg = readPkgForGenerator(this);
     const eslintConfigVersion = '^2.0.0';
+    const tsConfig = this.options.typescript
+      ? { '@dkundel/eslint-config-ts': eslintConfigVersion }
+      : {};
     extend(pkg, {
       devDependencies: {
         eslint: '^4.19.1',
         '@dkundel/eslint-config-js': eslintConfigVersion,
+        ...tsConfig,
       },
       scripts: {
         lint: 'eslint "!(node_modules)/**/*.{js,ts}"',
