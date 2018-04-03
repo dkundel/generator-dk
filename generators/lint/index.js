@@ -9,7 +9,7 @@ module.exports = class extends Generator {
     this.option('typescript', {
       type: Boolean,
       required: false,
-      defaults: false,
+      default: false,
       desc: 'Load configs for TypeScript',
     });
   }

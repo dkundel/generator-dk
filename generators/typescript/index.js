@@ -10,13 +10,13 @@ module.exports = class extends Generator {
     this.option('outputFolder', {
       type: String,
       required: false,
-      defaults: 'dist',
+      default: 'dist',
       desc: 'Folder to place output of TypeScript compiler',
     });
     this.option('compileInline', {
       type: Boolean,
       required: false,
-      defaults: false,
+      default: false,
       desc: 'Overrides outputFolder and instead places all files side by side.',
     });
   }
