@@ -209,6 +209,12 @@ module.exports = class extends Generator {
       });
     }
 
+    if (this.props.travis) {
+      this.composeWith(require.resolve('generator-travis/generators/app'), {
+        config: {},
+      });
+    }
+
     this.composeWith(require.resolve('../wireframe'), {
       typescript: this.props.typescript,
       type: this.props.type,
