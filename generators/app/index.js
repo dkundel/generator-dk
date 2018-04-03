@@ -51,14 +51,14 @@ module.exports = class extends Generator {
     this.option('typescript', {
       type: Boolean,
       required: false,
-      defaults: false,
+      default: false,
       desc: 'Initialize project as TypeScript project',
     });
 
     this.option('git', {
       type: Boolean,
       required: false,
-      defaults: true,
+      default: true,
       desc: 'Intiailizes a Git repo and sets the origin remote to GitHub',
     });
 
@@ -69,7 +69,7 @@ module.exports = class extends Generator {
     });
   }
 
-  initializing() {
+  async initializing() {
     this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
     // Pre set the default props from the information we have at this point
@@ -81,7 +81,7 @@ module.exports = class extends Generator {
       repositoryName: this.options.repositoryName,
       travis: this.options.travis,
       typescript: this.options.typescript,
-      githubAccount: this.github.username(),
+      githubAccount: await this.user.github.username(),
       license: this.pkg.license || 'MIT',
     };
 
@@ -209,6 +209,12 @@ module.exports = class extends Generator {
       });
     }
 
+    this.composeWith(require.resolve('../wireframe'), {
+      typescript: this.props.typescript,
+      type: this.props.type,
+      name: this.props.name,
+    });
+
     this.composeWith(require.resolve('../lint'), {
       typescript: this.props.typescript,
     });
@@ -234,32 +240,6 @@ module.exports = class extends Generator {
     }
   }
 
-  _createEntryFiles() {
-    const ext = this.props.typescript ? 'ts' : 'js';
-    const name = camelCase(this.props.name);
-    if (this.props.type === 'node') {
-      this.fs.copyTpl(
-        this.templatePath('node.js'),
-        this.destinationPath(`index.${ext}`),
-        { name }
-      );
-    } else {
-      this.fs.copyTpl(
-        this.templatePath(`module.${ext}`),
-        this.destinationPath(`index.${ext}`),
-        { name }
-      );
-    }
-
-    if (this.props.type === 'cli') {
-      this.fs.copyTpl(
-        this.templatePath(`cli.${ext}`),
-        this.destinationPath(`cli.${ext}`),
-        { name }
-      );
-    }
-  }
-
   writing() {
     const tpl = {
       moduleName: this.props.moduleName,
@@ -275,20 +255,8 @@ module.exports = class extends Generator {
 
     this._copyStaticDotFiles();
     this._writeReadme(tpl);
-    this._createEntryFiles();
 
     const pkg = getInitialPackageJson(tpl);
-    pkg.main = 'index.js';
-    if (this.props.type === 'cli') {
-      const tsDeps = this.props.typescript ? { '@types/meow': '^4.0.1' } : {};
-      extend(pkg, {
-        bin: 'cli.js',
-        dependencies: {
-          meow: '^4.0.0',
-          ...tsDeps,
-        },
-      });
-    }
 
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
   }
