@@ -13,13 +13,6 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
 
-    this.argument('name', {
-      type: String,
-      required: false,
-      desc: 'Project name',
-      default: basename(process.cwd()),
-    });
-
     this.option('travis', {
       type: Boolean,
       required: false,
@@ -239,11 +232,6 @@ module.exports = class extends Generator {
       githubAccount: this.props.githubAccount,
       projectName: this.props.repositoryName,
     });
-
-    if (this.props.name !== basename(process.cwd())) {
-      mkdirp(this.props.name);
-      this.destinationRoot(this.destinationPath(this.props.name));
-    }
   }
 
   writing() {
