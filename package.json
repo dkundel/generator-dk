@@ -42,6 +42,7 @@
     "deep-extend": "^0.5.0",
     "generator-license": "^5.4.0",
     "generator-node": "^2.4.0",
+    "generator-travis": "^1.6.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.defaultsdeep": "^4.6.0",
     "lodash.kebabcase": "^4.1.1",
