@@ -81,7 +81,7 @@ module.exports = class extends Generator {
       repositoryName: this.options.repositoryName,
       travis: this.options.travis,
       typescript: this.options.typescript,
-      githubAccount: userInfo().username,
+      githubAccount: this.github.username(),
       license: this.pkg.license || 'MIT',
     };
 
