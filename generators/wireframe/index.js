@@ -40,6 +40,28 @@ module.exports = class extends Generator {
     }
   }
 
+  _getConfigForNodeProject() {
+    const dependencies = {
+      'if-env': '^1.0.4',
+    };
+    const devDependencies = {
+      'node-env-run': '^3.0.2',
+    };
+
+    const scripts = {};
+    scripts.start =
+      'if-env NODE_ENV=production && npm run start:prod || npm run start:dev';
+    scripts['start:prod'] = 'node .';
+    scripts['start:dev'] = 'nodenv .';
+
+    if (this.props.typescript) {
+      scripts['start:dev'] = 'nodenv index.ts --exec "ts-node"';
+      devDependencies['ts-node'] = '^5.0.1';
+    }
+
+    return { scripts, devDependencies, dependencies };
+  }
+
   _createEntryFiles() {
     const ext = this.props.typescript ? 'ts' : 'js';
     const name = camelCase(this.props.name);
@@ -78,6 +100,10 @@ module.exports = class extends Generator {
           ...tsDeps,
         },
       });
+    }
+
+    if (this.props.type === 'node') {
+      extend(pkg, this._getConfigForNodeProject());
     }
 
     writePkgForGenerator(this, pkg);

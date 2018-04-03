@@ -74,7 +74,7 @@ module.exports = class extends Generator {
       repositoryName: this.options.repositoryName,
       travis: this.options.travis,
       typescript: this.options.typescript,
-      githubAccount: await this.user.github.username(),
+      defaultGithubAccount: await this.user.github.username(),
       license: this.pkg.license || 'MIT',
     };
 
@@ -118,17 +118,18 @@ module.exports = class extends Generator {
         name: 'githubAccount',
         message: 'GitHub username',
         store: true,
-        default: this.props.githubAccount,
+        default: this.props.defaultGithubAccount,
+        when: !this.props.githubAccount,
       },
       {
         name: 'description',
         message: 'Description',
-        when: !this.props.description,
+        when: !this.pkg.description,
       },
       {
         name: 'homepage',
         message: 'Project homepage url',
-        when: !this.props.homepage,
+        when: !this.pkg.homepage,
       },
       {
         name: 'authorName',
@@ -157,6 +158,7 @@ module.exports = class extends Generator {
         when: !this.props.type,
         choices: ['node', 'module', 'cli'],
         default: 'node',
+        store: true,
       },
       {
         type: 'confirm',
@@ -164,6 +166,7 @@ module.exports = class extends Generator {
         message: 'Would you like to use TypeScript?',
         when: !this.props.typescript,
         default: false,
+        store: true,
       },
     ];
 
@@ -174,11 +177,16 @@ module.exports = class extends Generator {
   }
 
   _copyStaticDotFiles() {
-    const files = ['editorconfig', 'gitignore', 'npmrc', 'prettierrc'];
+    const files = ['editorconfig', 'gitignore', 'npmrc', 'prettierrc', 'env'];
 
     for (const file of files) {
       this.fs.copy(this.templatePath(file), this.destinationPath(`.${file}`));
     }
+
+    this.fs.copy(
+      this.templatePath('env'),
+      this.destinationPath('.env.example')
+    );
   }
 
   _writeReadme(tpl) {
