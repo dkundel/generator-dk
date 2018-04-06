@@ -240,6 +240,10 @@ module.exports = class extends Generator {
       githubAccount: this.props.githubAccount,
       projectName: this.props.repositoryName,
     });
+
+    this.composeWith(require.resolve('../coc'), {
+      contactEmail: this.props.authorEmail,
+    });
   }
 
   writing() {
