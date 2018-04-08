@@ -94,7 +94,6 @@ module.exports = class extends Generator {
       <!-- BADGES:START -->
       ${badgesMd}
       <!-- BADGES:END -->`;
-    this.log(badgesWrapped);
     const newReadmeMd = readmeMd.replace(REGEX_BADGES, badgesWrapped);
     this.fs.write(this.destinationPath('README.md'), newReadmeMd);
   }
