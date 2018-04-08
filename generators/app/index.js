@@ -109,6 +109,9 @@ module.exports = class extends Generator {
   }
 
   prompting() {
+    const defaultProjectUrl = `https://github.com/${
+      this.props.defaultGithubAccount
+    }/${this.props.name}`;
     const prompts = [
       {
         name: 'name',
@@ -132,6 +135,7 @@ module.exports = class extends Generator {
       {
         name: 'homepage',
         message: 'Project homepage url',
+        default: defaultProjectUrl,
         when: !this.pkg.homepage,
       },
       {
@@ -270,6 +274,9 @@ module.exports = class extends Generator {
       name: this.props.authorEmail,
       email: this.props.authorEmail,
       url: this.props.authorUrl,
+      githubAccount: this.props.githubAccount,
+      repositoryName: this.props.repositoryName,
+      homepage: this.props.homepage,
     };
 
     this._copyStaticDotFiles();

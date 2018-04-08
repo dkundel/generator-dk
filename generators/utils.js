@@ -5,26 +5,28 @@ function getInitialPackageJson({
   name,
   email,
   url,
+  homepage,
   scripts = {},
   dependencies = {},
-  devDependencies = {}
+  devDependencies = {},
 }) {
   const pkgJson = {
     name: moduleName,
     version: '0.0.0',
+    homepage,
     description: projectDescription,
     license,
     author: {
       name,
       email,
-      url
+      url,
     },
     scripts: {
       start: 'node .',
-      ...scripts
+      ...scripts,
     },
     dependencies,
-    devDependencies
+    devDependencies,
   };
   return pkgJson;
 }
@@ -40,5 +42,5 @@ function writePkgForGenerator(generator, pkg) {
 module.exports = {
   getInitialPackageJson,
   readPkgForGenerator,
-  writePkgForGenerator
+  writePkgForGenerator,
 };
