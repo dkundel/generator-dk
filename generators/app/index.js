@@ -283,6 +283,11 @@ module.exports = class extends Generator {
     this._writeReadme(tpl);
 
     const pkg = getInitialPackageJson(tpl);
+    extend(pkg, {
+      scripts: {
+        test: 'echo "No tests specified" && exit 0',
+      },
+    });
 
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
   }

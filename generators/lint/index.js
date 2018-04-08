@@ -43,5 +43,9 @@ module.exports = class extends Generator {
       this.destinationPath('.eslintrc'),
       this.options
     );
+    this.fs.copy(
+      this.templatePath('eslintignore'),
+      this.destinationPath('.eslintignore')
+    );
   }
 };
