@@ -65,6 +65,9 @@ module.exports = class extends Generator {
   async initializing() {
     this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
+    const getGitHubName = () =>
+      this.user.github.username().catch(() => userInfo().username);
+
     // Pre set the default props from the information we have at this point
     this.props = {
       name: this.pkg.name,
@@ -74,7 +77,7 @@ module.exports = class extends Generator {
       repositoryName: this.options.repositoryName,
       travis: this.options.travis,
       typescript: this.options.typescript,
-      defaultGithubAccount: await this.user.github.username(),
+      defaultGithubAccount: await getGitHubName(),
       license: this.pkg.license || 'MIT',
     };
 
@@ -243,6 +246,16 @@ module.exports = class extends Generator {
 
     this.composeWith(require.resolve('../coc'), {
       contactEmail: this.props.authorEmail,
+    });
+
+    this.composeWith(require.resolve('../badges'), {
+      moduleName: this.props.moduleName,
+      githubUserName: this.props.githubAccount,
+      githubProjectName: this.props.repositoryName,
+      travis: this.props.travis,
+      codeOfConduct: true,
+      contributors: true,
+      npm: this.props.type === 'module',
     });
   }
 
