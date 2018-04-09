@@ -21,17 +21,15 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "yeoman-test": "^1.7.0",
-    "yeoman-assert": "^3.1.0",
-    "nsp": "^2.8.0",
+    "@dkundel/eslint-config-js": "^2.0.1",
     "eslint": "^4.19.1",
-    "prettier": "^1.11.1",
     "husky": "^0.14.3",
+    "jest": "^22.0.6",
     "lint-staged": "^6.1.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-config-xo": "^0.20.1",
-    "jest": "^22.0.6"
+    "nsp": "^2.8.0",
+    "prettier": "^1.11.1",
+    "yeoman-assert": "^3.1.0",
+    "yeoman-test": "^1.7.0"
   },
   "engines": {
     "npm": ">= 4.0.0"
@@ -56,7 +54,8 @@
   },
   "scripts": {
     "prepublishOnly": "nsp check",
-    "pretest": "eslint .",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
     "precommit": "lint-staged",
     "test": "jest"
   },
@@ -72,25 +71,12 @@
   },
   "eslintConfig": {
     "extends": [
-      "xo",
-      "prettier"
+      "@dkundel/js",
+      "@dkundel/js/jest"
     ],
-    "env": {
-      "jest": true,
-      "node": true
-    },
     "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true,
-          "printWidth": 90
-        }
-      ]
-    },
-    "plugins": [
-      "prettier"
-    ]
+      "no-underscore-dangle": "off"
+    }
   },
   "repository": "dkundel/generator-dk",
   "license": "MIT"
