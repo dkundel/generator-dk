@@ -30,11 +30,6 @@ module.exports = class extends Generator {
         pretest: 'npm run lint',
       },
     });
-    pkg.scripts = {
-      lint: 'eslint "!(node_modules)/**/*.{js,ts}"',
-      pretest: 'npm run lint',
-      ...pkg.scripts,
-    };
     writePkgForGenerator(this, pkg);
 
     this.fs.copyTpl(
