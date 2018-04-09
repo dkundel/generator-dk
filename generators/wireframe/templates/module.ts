@@ -1,3 +1,3 @@
-export default function <%= name %>() {
+export default function <%= name %>(): void {
   console.log('Hello 👋');
 }

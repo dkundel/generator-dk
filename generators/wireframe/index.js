@@ -31,13 +31,6 @@ module.exports = class extends Generator {
 
   initialize() {
     this.props = extend({}, this.options);
-    if (this.options.module) {
-      this.props.type = 'module';
-    }
-
-    if (this.options.cli) {
-      this.props.type = 'cli';
-    }
   }
 
   _getConfigForNodeProject() {
@@ -89,12 +82,13 @@ module.exports = class extends Generator {
   }
 
   _updatePackageJson() {
+    const { typescript } = this.props;
     const pkg = readPkgForGenerator(this);
-    pkg.main = 'index.js';
+    pkg.main = typescript ? 'dist/index.js' : 'index.js';
     if (this.props.type === 'cli') {
       const tsDeps = this.props.typescript ? { '@types/meow': '^4.0.1' } : {};
       extend(pkg, {
-        bin: 'cli.js',
+        bin: typescript ? 'dist/cli.js' : 'cli.js',
         dependencies: {
           meow: '^4.0.0',
           ...tsDeps,
