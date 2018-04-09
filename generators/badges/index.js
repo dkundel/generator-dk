@@ -27,6 +27,7 @@ module.exports = class extends Generator {
 
     ['travis', 'codeOfConduct', 'npm', 'contributors'].forEach(optName => {
       this.option(optName, {
+        type: Boolean,
         required: false,
         default: true,
         desc: `Should place ${optName} badge`,
