@@ -25,7 +25,7 @@ module.exports = class extends Generator {
       desc: 'GitHub project name',
     });
 
-    ['travis', 'codeOfConduct', 'npm', 'contributors'].map(optName => {
+    ['travis', 'codeOfConduct', 'npm', 'contributors'].forEach(optName => {
       this.option(optName, {
         required: false,
         default: true,
@@ -86,9 +86,7 @@ module.exports = class extends Generator {
     const readmeMd = this.fs.read(this.destinationPath('README.md'));
     const badgesMd = badges
       .filter(this._hasNoConditionOrOptionIsTrue.bind(this))
-      .map(({ link, imgSrc, altText }) => {
-        return `[![${altText}](${imgSrc})](${link})`;
-      })
+      .map(({ link, imgSrc, altText }) => `[![${altText}](${imgSrc})](${link})`)
       .join('');
     const badgesWrapped = stripIndent`
       <!-- BADGES:START -->

@@ -1,10 +1,7 @@
-'use strict';
 const Generator = require('yeoman-generator');
 const kebabCase = require('lodash.kebabcase');
-const camelCase = require('lodash.camelcase');
 const parseAuthor = require('parse-author');
 const extend = require('deep-extend');
-const mkdirp = require('mkdirp');
 const { basename } = require('path');
 const { userInfo } = require('os');
 const { getInitialPackageJson } = require('../utils');
@@ -186,9 +183,9 @@ module.exports = class extends Generator {
   _copyStaticDotFiles() {
     const files = ['editorconfig', 'gitignore', 'npmrc', 'prettierrc', 'env'];
 
-    for (const file of files) {
+    files.forEach(file => {
       this.fs.copy(this.templatePath(file), this.destinationPath(`.${file}`));
-    }
+    });
 
     this.fs.copy(
       this.templatePath('env'),

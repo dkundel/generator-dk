@@ -1,4 +1,3 @@
-'use strict';
 const Generator = require('yeoman-generator');
 const { join } = require('path');
 const extend = require('lodash.defaultsdeep');

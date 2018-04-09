@@ -1,4 +1,3 @@
-'use strict';
 const Generator = require('yeoman-generator');
 const extend = require('lodash.defaultsdeep');
 const { readPkgForGenerator, writePkgForGenerator } = require('../utils');
