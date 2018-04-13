@@ -2,7 +2,7 @@ const Generator = require('yeoman-generator');
 const { stripIndent } = require('common-tags');
 
 const COC_README_TEXT = stripIndent`
-  Please note that this project is released with a [Contributor Code of Conduct](code-of-conduct.md).
+  Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
   By participating in this project you agree to abide by its terms.`;
 
 module.exports = class extends Generator {
