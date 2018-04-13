@@ -23,6 +23,7 @@
   "devDependencies": {
     "@dkundel/eslint-config-js": "^2.0.1",
     "eslint": "^4.19.1",
+    "fs-extra": "^5.0.0",
     "husky": "^0.14.3",
     "jest": "^22.0.6",
     "lint-staged": "^6.1.1",
@@ -50,7 +51,8 @@
     "yosay": "^2.0.1"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": ["/node_modules/", "/__tests__/fixtures/", "/__tests__/utils/"]
   },
   "scripts": {
     "prepublishOnly": "nsp check",
