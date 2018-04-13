@@ -1,7 +1,5 @@
-const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
-const { stripIndent } = require('common-tags');
 
 const generator = require.resolve('../generators/badges');
 const { initializeFiles } = require('./utils/fs');

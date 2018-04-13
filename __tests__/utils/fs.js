@@ -13,8 +13,8 @@ function initializeFiles(fixture, files) {
   return dir => {
     files.forEach(file => {
       loadFileFromFixtures(dir, fixture, file);
-    })
-  }
+    });
+  };
 }
 
 module.exports = { initializeFiles };
