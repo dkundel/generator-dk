@@ -21,9 +21,10 @@ module.exports = class extends Generator {
   }
 
   _writeTsConfig() {
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('tsconfig.json'),
-      this.destinationPath('tsconfig.json')
+      this.destinationPath('tsconfig.json'),
+      this.options
     );
   }
 
@@ -43,7 +44,7 @@ module.exports = class extends Generator {
     });
 
     if (!this.options.compileInline) {
-      pkg.main = join(this.options.outputFolder, pkg.main);
+      pkg.main = join(this.options.outputFolder, pkg.main || 'index.js');
       if (typeof pkg.bin === 'string') {
         pkg.bin = join(this.options.outputFolder, pkg.bin);
       }
