@@ -30,7 +30,8 @@
     "nsp": "^2.8.0",
     "prettier": "^1.11.1",
     "yeoman-assert": "^3.1.0",
-    "yeoman-test": "^1.7.0"
+    "yeoman-test": "^1.7.0",
+    "all-contributors-cli": "^4.11.1"
   },
   "engines": {
     "npm": ">= 4.0.0"
@@ -52,14 +53,20 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testPathIgnorePatterns": ["/node_modules/", "/__tests__/fixtures/", "/__tests__/utils/"]
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/__tests__/fixtures/",
+      "/__tests__/utils/"
+    ]
   },
   "scripts": {
     "prepublishOnly": "nsp check",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "precommit": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "contrib:add": "all-contributors add",
+    "contrib:gen": "all-contributors generate"
   },
   "lint-staged": {
     "*.js": [
