@@ -56,7 +56,7 @@ describe('generator-dk:contributors', () => {
 
   test('calls all-contributors cli', () => {
     expect(Generator.prototype.spawnCommandSync).toHaveBeenCalledWith('npx', [
-      'all-contributors',
+      'all-contributors-cli',
       'add',
       'dkundel',
       'code,design,ideas,review,doc',

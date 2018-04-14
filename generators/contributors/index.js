@@ -60,7 +60,7 @@ module.exports = class extends Generator {
 
   end() {
     this.spawnCommandSync('npx', [
-      'all-contributors',
+      'all-contributors-cli',
       'add',
       this.options.githubAccount,
       'code,design,ideas,review,doc',
