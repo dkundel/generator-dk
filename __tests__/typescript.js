@@ -2,6 +2,7 @@ const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
 const { initializeFiles } = require('./utils/fs');
+
 const generator = require.resolve('../generators/typescript');
 
 describe('generator-dk:typescript', () => {
