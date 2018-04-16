@@ -6,13 +6,13 @@
 
 > <%= projectDescription %>
 
-<% if (type === 'module') { %>## Installation
+<% if (type !== 'node') { %>## Installation
 
 ```bash
 npm install <%= moduleName %>
 ```
 
-<%_ } _%><% if (type !== 'module') { %>## Setup
+<%_ } _%><% if (type === 'module') { %>## Setup
 
 ```bash
 git clone git@github.com:<%= githubAccount %>/<%= repositoryName %>.git
