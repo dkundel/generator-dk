@@ -256,7 +256,7 @@ module.exports = class extends Generator {
       travis: this.props.travis,
       codeOfConduct: true,
       contributors: true,
-      npm: this.props.type === 'module',
+      npm: this.props.type !== 'node',
     });
   }
 
