@@ -11,7 +11,7 @@ describe('generator-dk:lint', () => {
     assert.jsonFileContent('package.json', {
       scripts: {
         pretest: 'npm run lint',
-        lint: 'eslint "!(node_modules)/**/*.{js,ts}"',
+        lint: 'eslint .',
       },
     });
   });

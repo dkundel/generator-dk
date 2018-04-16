@@ -26,7 +26,7 @@ module.exports = class extends Generator {
         ...tsConfig,
       },
       scripts: {
-        lint: 'eslint "!(node_modules)/**/*.{js,ts}"',
+        lint: 'eslint .',
         pretest: 'npm run lint',
       },
     });
